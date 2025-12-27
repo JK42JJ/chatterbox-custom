@@ -11,6 +11,15 @@ elif torch.backends.mps.is_available():
 else:
     device = "cpu"
 
+# Patch torch.load for MPS compatibility
+map_location = torch.device(device)
+torch_load_original = torch.load
+def patched_torch_load(*args, **kwargs):
+    if 'map_location' not in kwargs:
+        kwargs['map_location'] = map_location
+    return torch_load_original(*args, **kwargs)
+torch.load = patched_torch_load
+
 print(f"Using device: {device}")
 
 model = ChatterboxTTS.from_pretrained(device=device)
@@ -26,6 +35,6 @@ ta.save("test-2.wav", wav, multilingual_model.sr)
 
 
 # If you want to synthesize with a different voice, specify the audio prompt
-AUDIO_PROMPT_PATH = "YOUR_FILE.wav"
-wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH)
-ta.save("test-3.wav", wav, model.sr)
+# AUDIO_PROMPT_PATH = "YOUR_FILE.wav"
+# wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH)
+# ta.save("test-3.wav", wav, model.sr)

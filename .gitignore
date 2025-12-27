@@ -44,5 +44,8 @@ syn_out/
 checkpoints/
 .gradio
 
+# Downloaded model files (large binary files)
+models/
+
 # Ignore generated sample .wav files
 **/*.wav

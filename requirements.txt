@@ -1,0 +1,32 @@
+# Chatterbox TTS Requirements
+# Python >= 3.10 required
+
+# Core ML Frameworks
+torch==2.6.0
+torchaudio==2.6.0
+numpy>=1.24.0,<1.26.0
+
+# HuggingFace
+transformers==4.46.3
+diffusers==0.29.0
+safetensors==0.5.3
+huggingface_hub
+
+# Audio Processing
+librosa==0.11.0
+pyloudnorm
+
+# Speech & Text Processing
+s3tokenizer
+conformer==0.3.2
+spacy-pkuseg
+pykakasi==2.3.0
+
+# Watermarking
+resemble-perth==1.0.1
+
+# Configuration
+omegaconf
+
+# Web UI (Optional - for Gradio demos)
+gradio==5.44.1
